@@ -10,11 +10,23 @@ export default function ContactList() {
   );
   return (
     <ul className={css['contact-list']}>
-      {contactsData.map(contact => (
-        <li className={css['contact-item']} key={contact.id}>
-          <Contact contact={contact} />
+      {contacts && contacts.length === 0 && (
+        <li className={css['contact-item']}>You have no contacts yet</li>
+      )}
+      {query && contactsData.length === 0 && (
+        <li className={css['contact-item']}>No contacts found</li>
+      )}
+      {contactsData ? (
+        contactsData.map(contact => (
+          <li className={css['contact-item']} key={contact.id}>
+            <Contact contact={contact} />
+          </li>
+        ))
+      ) : (
+        <li className={css['contact-item']}>
+          <p>No contacts found</p>
         </li>
-      ))}
+      )}
     </ul>
   );
 }
